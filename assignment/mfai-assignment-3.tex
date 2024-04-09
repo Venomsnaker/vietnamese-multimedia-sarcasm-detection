@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath}
+\usepackage[nohead, nomarginpar, margin=1in, foot=.25in]{geometry}
+\renewcommand{\baselinestretch}{1.15}
+\begin{document}
+
+\section*{Bài 3.} \large {Chéo hóa trực giao các ma trận sau:}
+\[
+    a) \; A =
+    \begin{bmatrix}
+        1 & 0 & 2 \\ 0 & -1 & -2 \\ 2 & -2 & 0
+    \end{bmatrix}
+    \quad
+    b) \; B =
+    \begin{bmatrix}
+        2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2
+    \end{bmatrix}
+\]
+
+\subsection*{Bài 3.a}
+\[
+    A =
+    \begin{bmatrix}
+        1 & 0 & 2 \\ 0 & -1 & -2 \\ 2 & -2 & 0
+    \end{bmatrix}
+\]
+\( P_A(\lambda) = |A - \lambda I| = -\lambda^3 + 9\lambda.\)
+\newline Khi đó \( P_{A}(\lambda) = 0 \Leftrightarrow \lambda \in \{ -3; 0; 3 \}. \)
+\begin{itemize}
+    \item Với \( \lambda = -3: \)
+          \newline Giải hệ phương trình \( (A - \lambda I)x = 0 \).
+          Ta có các vectơ riêng của A ứng với \( \lambda = -3\) có dạng
+          \( x_1 = t.\begin{pmatrix} -1/2 \\ 1 \\ 1 \end{pmatrix}
+          ,\forall t \in R, t \neq 0 \).
+          \newline Chọn t = 1 và chuẩn hóa với \( \begin{Vmatrix} -1/2 \\ 1 \\ 1 \end{Vmatrix}
+          = \dfrac{3}{2} \) , ta được
+          \(v_1 = \begin{pmatrix} -1/3 \\ 2/3 \\ 2/3 \end{pmatrix}\).
+    \item Với \( \lambda = 0: \)
+          \newline Tương tự, ta có các vectơ riêng của A có dạng
+          \( x_2 = t.\begin{pmatrix}
+              -2 \\ -2 \\ 1
+          \end{pmatrix} ,\forall t \in R, t \neq 0 \)
+          \newline Chọn t = 1 và chuẩn hóa với \( \begin{Vmatrix} -2 \\ -2 \\ 1 \end{Vmatrix}
+          = 3 \) , ta được
+          \(v_2 = \begin{pmatrix} -2/3 \\ -2/3 \\ 1/3 \end{pmatrix}\).
+    \item Với \( \lambda = 3: \)
+          \newline Tương tự, ta có các vectơ riêng của A có dạng
+          \( x_3 = t.\begin{pmatrix}
+              1 \\ -1/2 \\ 1
+          \end{pmatrix} ,\forall t \in R, t \neq 0 \)
+          \newline Chọn t = 1 và chuẩn hóa với \( \begin{Vmatrix} 1 \\ -1/2 \\ 1 \end{Vmatrix}
+          = \dfrac{3}{2} \) , ta được
+          \(v_3 = \begin{pmatrix} 2/3 \\ -1/3 \\ 2/3 \end{pmatrix}\).
+\end{itemize}
+Ta thu được ma trận chéo hóa của A: \(
+P = (v_1, v_2, v_3) = \begin{pmatrix}
+    -1/3 & -2/3 & 2/3  \\
+    2/3  & -2/3 & -1/3 \\
+    2/3  & 1/3  & 2/3
+\end{pmatrix} \)
+\newline Thực hiện chéo hóa trực giao, ta được:
+\[
+    P^TAP = \begin{pmatrix}
+        -3 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 3
+    \end{pmatrix}
+\]
+
+\subsection*{Bài 3.b}
+\[
+    A =
+    \begin{bmatrix}
+        2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2
+    \end{bmatrix}
+\]
+\( P_A(\lambda) = |A - \lambda I| = (2-\lambda)^3 - 2(2-\lambda). \)
+\newline Khi đó \( P_{A}(\lambda) = 0 \Leftrightarrow \lambda \in \{ 2-\sqrt{2}, 2, 2+\sqrt{2} \} \)
+\begin{itemize}
+    \item Với \( \lambda = 2-\sqrt{2}: \)
+          \newline Giải hệ phương trình \( (A - \lambda I)x = 0 \).
+          Ta có các vectơ riêng của A ứng với \( \lambda = 2-\sqrt2\) có dạng
+          \( x_1 = t.\begin{pmatrix} 1 \\ \sqrt{2} \\ 1 \end{pmatrix}
+          ,\forall t \in R, t \neq 0 \).
+          \newline Chọn t = 1 và chuẩn hóa với \( \begin{Vmatrix} 1 \\ \sqrt2 \\ 1 \end{Vmatrix}
+          = 2 \) , ta được
+          \(v_1 = \begin{pmatrix} 1/2 \\ 1/ \sqrt2 \\ 1/2 \end{pmatrix}\).
+    \item Với \( \lambda = 2: \)
+          \newline Tương tự, ta có các vectơ riêng của A có dạng
+          \( x_2 = t.\begin{pmatrix}
+              -1 \\ 0 \\ 1
+          \end{pmatrix} ,\forall t \in R, t \neq 0 \)
+          \newline Chọn t = 1 và chuẩn hóa với \( \begin{Vmatrix} -1 \\ 0 \\ 1 \end{Vmatrix}
+          = \sqrt2 \) , ta được
+          \(v_2 = \begin{pmatrix} -1/ \sqrt2 \\ 0 \\ 1/ \sqrt2 \end{pmatrix}\).
+    \item Với \( \lambda = 2+\sqrt2: \)
+          \newline Tương tự, ta có các vectơ riêng của A có dạng
+          \( x_3 = t.\begin{pmatrix}
+              1 \\ - \sqrt2 \\ 1
+          \end{pmatrix} ,\forall t \in R, t \neq 0 \)
+          \newline Chọn t = 1 và chuẩn hóa với \( \begin{Vmatrix} 1 \\ - \sqrt2 \\ 1 \end{Vmatrix}
+          = 2 \) , ta được
+          \(v_3 = \begin{pmatrix} 1/2 \\ -1/ \sqrt2 \\ 1/2 \end{pmatrix}\).
+\end{itemize}
+Ta thu được ma trận chéo hóa của A: \(
+P = (v_1, v_2, v_3) = \begin{pmatrix}
+    1/2 & -1/ \sqrt2 & 1/2  \\
+    1/ \sqrt2  & 0 & -1/ \sqrt2 \\
+    1/2  & 1/ \sqrt2  & 1/2
+\end{pmatrix} \)
+\newline Thực hiện chéo hóa trực giao, ta được:
+\[
+    P^TAP = \begin{pmatrix}
+        2 - \sqrt2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 + \sqrt2
+    \end{pmatrix}
+\]
+
+\end{document}
