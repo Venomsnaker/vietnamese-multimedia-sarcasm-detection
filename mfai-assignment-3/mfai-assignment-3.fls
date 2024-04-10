@@ -1,6 +1,6 @@
-PWD d:\Projects\latex-bachelor\assignment
+PWD d:\Projects\latex-bachelor\mfai-assignment-3
 INPUT C:\Users\ADMIN\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT d:\Projects\latex-bachelor\assignment\mfai-assignment-3.tex
+INPUT d:\Projects\latex-bachelor\mfai-assignment-3\mfai-assignment-3.tex
 OUTPUT mfai-assignment-3.log
 INPUT C:\Users\ADMIN\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\ADMIN\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls

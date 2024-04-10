@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1712678153.38927 "d:/Projects/latex-bachelor/assignment/mfai-assignment-3.tex" "mfai-assignment-3.pdf" "mfai-assignment-3" 1712678153.9034 0
+["pdflatex"] 1712757442.51525 "d:/Projects/latex-bachelor/mfai-assignment-3/mfai-assignment-3.tex" "mfai-assignment-3.pdf" "mfai-assignment-3" 1712757442.94982 0
   "C:/Users/ADMIN/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1712675280 88371 b965f57369ed322039596060d18f4416 ""
   "C:/Users/ADMIN/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1712673647 14064 adf3042c1460e1d00618625cdd4c7f27 ""
   "C:/Users/ADMIN/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1712670806 24236005 bdfb1050e4fc9131e1ebeedb6d4068dd ""
@@ -49,9 +49,9 @@
   "C:/Users/ADMIN/AppData/Local/Programs/MiKTeX/tex/latex/vntex/t5enc.dfu" 1368738347 13949 387dd4fa58aea5f873839c93430fffed ""
   "C:/Users/ADMIN/AppData/Local/Programs/MiKTeX/tex/latex/vntex/vietnam.sty" 1368738347 2477 91784aa2c9213f74609391e3cae65a13 ""
   "C:/Users/ADMIN/AppData/Local/Programs/MiKTeX/tex/latex/vntex/vncaps.tex" 1368738347 3273 a55ebdb07413d2fea580f210e3c0b252 ""
-  "d:/Projects/latex-bachelor/assignment/mfai-assignment-3.tex" 1712678152 4786 ed4e44212ee6dee7b0b5efc2a265a3f4 ""
-  "mfai-assignment-3.aux" 1712678153 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
-  "mfai-assignment-3.tex" 1712678152 4786 ed4e44212ee6dee7b0b5efc2a265a3f4 ""
+  "d:/Projects/latex-bachelor/mfai-assignment-3/mfai-assignment-3.tex" 1712757442 9855 b48fcd967ce8d0dbee2da11493ff8435 ""
+  "mfai-assignment-3.aux" 1712757442 32 2d1df76398b3c48c6419a45a7331db2d "pdflatex"
+  "mfai-assignment-3.tex" 1712757442 9855 b48fcd967ce8d0dbee2da11493ff8435 ""
   (generated)
   "mfai-assignment-3.aux"
   "mfai-assignment-3.log"
