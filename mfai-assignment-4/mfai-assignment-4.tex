@@ -1,0 +1,60 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[a4paper, nohead, nomarginpar, margin=0.75in, foot=0.5in]{geometry}
+\renewcommand{\baselinestretch}{1.25}
+
+\title{\textbf{PHƯƠNG PHÁP TOÁN CHO TRÍ TUỆ NHÂN TẠO \newline Bài thực hành 4}}
+
+\author{22120128 - Bùi Quốc Huy - TNT2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Bài 1.} 
+Sử dụng vector gradient và ma trận Hesse để tìm các điểm cực đại, cực tiểu của các hàm bậc hai sau và cho biết giá trị của hàm số tại các điểm đó.
+\newline a) $ f(x, y, z) = 4x^2 + 10y^2 + 17z^2 - 12yz - 12xz $
+\newline b) $ f(x, y, z) = 9x^2 + 16y^2 + 3z^2 - 12xy + 12yz $
+\newline c) $ f(x, y, z) = x^2 - 19y^2 + 24xy - 12yz + 12xz $
+\newline d) $ f(x, y) = x + y^2 $ 
+
+\begin{center}
+    \textbf{Bài Làm}
+\end{center}
+ 
+\section*{Câu 1. a}
+$ f(x, y, z) = 4x^2 + 10y^2 + 17z^2 - 12yz - 12xz $
+\newline Ta có: $ \dfrac{\partial f}{\partial x} = 8x - 12z; \quad \dfrac{\partial f}{\partial y} = 20y - 12z; \quad \dfrac{\partial f}{\partial z} = -12x -12y + 34z $
+\newline $ \Leftrightarrow \nabla f(x, y, z) = \begin{bmatrix}
+    8x - 12z \\
+    20y - 12z \\
+    -12x - 12y + 34z
+\end{bmatrix}; \quad \nabla f(x, y, z) = 0 \Rightarrow \begin{bmatrix}
+    x \\ y \\ z
+\end{bmatrix} = \begin{bmatrix}
+    0 \\ 0 \\ 0
+\end{bmatrix} $
+\newline Mặt khác:
+\newline $ \dfrac{\partial^2 f}{\partial x^2} = 8; \quad \dfrac{\partial^2 f}{\partial y \partial x} = 0; \quad \dfrac{\partial^2 f}{\partial z \partial x} = -12 $
+\newline $ \dfrac{\partial^2 f}{\partial x \partial y} = 0; \quad \dfrac{\partial^2 f}{\partial y^2} = 20; \quad \dfrac{\partial^2 f}{\partial z \partial y} = -12 $
+\newline $ \dfrac{\partial^2 f}{\partial x \partial z} = -12; \quad \dfrac{\partial^2 f}{\partial y \partial z} = -12; \quad \dfrac{\partial^2 f}{\partial z^2} = 34 $
+\newline $ \Leftrightarrow \nabla^2 f(x, y, z) = \begin{bmatrix}
+    8 & 0 & -12 \\
+    0 & 20 & -12 \\
+    -12 & -12 & 34
+\end{bmatrix} $
+\newline Ta có: $ D_1 = \begin{vmatrix} 8 \end{vmatrix} = 8; \quad D_2 = \begin{vmatrix}
+    8 & 0 \\
+    0 & 20
+\end{vmatrix} = 160; \quad D_3 = \begin{vmatrix}
+    8 & 0 & -12 \\
+    0 & 20 & -12 \\
+    -12 & -12 & 34
+\end{vmatrix} = 1408 $
+\newline Các định thức của $ \nabla^2 f(x, y, z) > 0 $ nên hàm f lồi trên R, $ \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} $ là điểm cực tiểu của f. $ f(0, 0, 0) = 0 $
+
+\end{document}
