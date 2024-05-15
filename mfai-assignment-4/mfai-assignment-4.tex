@@ -22,12 +22,22 @@ Sử dụng vector gradient và ma trận Hesse để tìm các điểm cực đ
 \newline c) $ f(x, y, z) = x^2 - 19y^2 + 24xy - 12yz + 12xz $
 \newline d) $ f(x, y) = x + y^2 $ 
 
+\section*{Bài 2.}
+Hãy viết chương trình áp dụng thuật giải gradient với thủ tục quay lui để tìm điểm dừng và giá trị nhỏ nhất. Hãy thử với các tùy chọn với các tham số $ m_1 $ và $ \alpha $ như sau, sau đó hãy đánh giá tốc độ trong mỗi trường hợp:
+\newline a) $ m_1 = 0.01 $ và $ \alpha = 0.5 $
+\newline b) $ m_1 = 0.03 $ và $ \alpha = 0.6 $
+\newline Hãy thử với các test là các hàm sau:
+\begin{itemize}
+    \item $ f(x_1, x_2) = x_1^3 + x_2^2 - 3x_1 - 2x_2 + 12 $
+    \item $ f(x_1, x_2) = (x_1 - 6)^2 + 2(x_2 - 3)^2 $
+\end{itemize}
+
 \begin{center}
     \textbf{Bài Làm}
 \end{center}
  
 \section*{Câu 1. a}
-$ f(x, y, z) = 4x^2 + 10y^2 + 17z^2 - 12yz - 12xz $
+Khảo sát: $ f(x, y, z) = 4x^2 + 10y^2 + 17z^2 - 12yz - 12xz $
 \newline Ta có: $ \dfrac{\partial f}{\partial x} = 8x - 12z; \quad \dfrac{\partial f}{\partial y} = 20y - 12z; \quad \dfrac{\partial f}{\partial z} = -12x -12y + 34z $
 \newline $ \Leftrightarrow \nabla f(x, y, z) = \begin{bmatrix}
     8x - 12z \\
@@ -57,4 +67,99 @@ $ f(x, y, z) = 4x^2 + 10y^2 + 17z^2 - 12yz - 12xz $
 \end{vmatrix} = 1408 $
 \newline Các định thức của $ \nabla^2 f(x, y, z) > 0 $ nên hàm f lồi trên R, $ \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} $ là điểm cực tiểu của f. $ f(0, 0, 0) = 0 $
 
+\section*{Câu 1. b}
+Khảo sát: $ f(x, y, z) = 9x^2 + 16y^2 + 3z^2 - 12xy + 12yz $
+\newline Ta có: $ \nabla f(x, y, z) = \begin{bmatrix}
+    18x - 12y \\
+    -12x + 32y + 12z \\
+    12y + 6z
+\end{bmatrix}; \quad \nabla f(x, y, z) = 0 \Rightarrow \begin{bmatrix}
+    x \\ y \\ z
+\end{bmatrix} = \begin{bmatrix}
+    \dfrac{-t}{3} \\
+    \dfrac{-t}{2} \\
+    t
+\end{bmatrix}; \quad \forall t \in R $
+\newline Mặt khác: $ $
+\newline $ \dfrac{\partial^2 f}{\partial x^2} = 18; \quad \dfrac{\partial^2 f}{\partial y \partial x} = -12; \quad \dfrac{\partial^2 f}{\partial z \partial x} = 0 $
+\newline $ \dfrac{\partial^2 f}{\partial x \partial y} = -12; \quad \dfrac{\partial^2 f}{\partial y^2} = 32; \quad \dfrac{\partial^2 f}{\partial z \partial y} = 12 $
+\newline $ \dfrac{\partial^2 f}{\partial x \partial z} = 0; \quad \dfrac{\partial^2 f}{\partial y \partial z} = 12; \quad \dfrac{\partial^2 f}{\partial z^2} = 6 $
+\newline $ \Leftrightarrow \nabla^2 f(x, y, z) = \begin{bmatrix}
+    18 & -12 & 0 \\
+    -12 & 32 & 12 \\
+    0 & 12 & 6
+\end{bmatrix} $
+\newline Xét phương trình đặc trưng: $ det(A - \lambda I) = 0 $
+\newline $ \Leftrightarrow \begin{vmatrix}
+    18 - \lambda & -12 & 0 \\
+    -12 & 32 - \lambda & 12 \\
+    0 & 12 & 6 - \lambda
+\end{vmatrix} = 0 \Rightarrow \begin{cases}
+    \lambda_1 = 0 \\
+    \lambda_2 = 14 \\
+    \lambda_3 = 42
+\end{cases} $
+\newline Các trị riêng của $ \nabla^2 f(x, y, z) \ge 0 $ nên nửa xác định dương, hàm f lồi trên R.
+\newline Các điểm $ \begin{bmatrix}
+    \dfrac{-t}{3} \\
+    \dfrac{-t}{2} \\
+    t
+\end{bmatrix}; \quad \forall t \in R $ là các điểm cực tiểu của f. $ f(\dfrac{-t}{3}, \dfrac{-t}{2}, t) = 0$
+
+\section*{Câu 1. c}
+Khảo sát: $ f(x, y, z) =  x^2 - 19y^2 + 24xy - 12yz + 12xz $
+\newline Ta có: $ \nabla f(x, y, z) = \begin{bmatrix}
+    2x + 24y + 12z \\
+    14x - 38y - 12z \\
+    12x - 12yz
+\end{bmatrix}; \quad \nabla f(x, y, z) = 0 \Rightarrow \begin{bmatrix}
+    x \\ y \\ z
+\end{bmatrix} = \begin{bmatrix}
+    0 \\
+    0 \\
+    0
+\end{bmatrix} $
+\newline Mặt khác: $ $
+\newline $ \dfrac{\partial^2 f}{\partial x^2} = 2; \quad \dfrac{\partial^2 f}{\partial y \partial x} = 24; \quad \dfrac{\partial^2 f}{\partial z \partial x} = 12 $
+\newline $ \dfrac{\partial^2 f}{\partial x \partial y} = 24; \quad \dfrac{\partial^2 f}{\partial y^2} = -38; \quad \dfrac{\partial^2 f}{\partial z \partial y} = -12 $
+\newline $ \dfrac{\partial^2 f}{\partial x \partial z} = 12; \quad \dfrac{\partial^2 f}{\partial y \partial z} = -12; \quad \dfrac{\partial^2 f}{\partial z^2} = 0 $
+\newline $ \Leftrightarrow \nabla^2 f(x, y, z) = \begin{bmatrix}
+    2 & 24 & 12 \\
+    24 & -38 & -12 \\
+    12 & -12 & 0
+\end{bmatrix} $
+\newline Xét phương trình đặc trưng: $ det(A - \lambda I) = 0 $
+\newline $ \Leftrightarrow \begin{vmatrix}
+    2 - \lambda & 24 & 12 \\
+    24 & -38 - \lambda & -12 \\
+    12 & -12 & - \lambda
+\end{vmatrix} = 0 \Rightarrow \begin{cases}
+    \lambda_1 = -54 \\
+    \lambda_2 = 2 \\
+    \lambda_3 = 16
+\end{cases} $
+\newline Các trị riêng của $ \nabla^2 f(x, y, z) $ không $ \le 0 $ và $ \ge 0 $ nên không có kết luận về sự lồi (lõm) của hàm f.
+\newline Hàm f không có điểm cực đại và cực tiểu. $ \begin{bmatrix}
+    0 \\ 0 \\ 0
+\end{bmatrix} $ là điểm yên ngựa của hàm f.
+
+\section*{Câu 1. d}
+Khảo sát: $ f(x, y) = x + y^2 $
+\newline Ta có: $ \dfrac{\partial f}{\partial x} = 1; \quad \dfrac{\partial f}{\partial y} = 2y $
+\newline $ \Leftrightarrow \nabla f(x, y) = \begin{bmatrix}
+    1 \\
+    2y \end{bmatrix}; \quad \nabla^2 f(x, y) = \begin{bmatrix}
+    0 & 0 \\
+    0 & 2
+\end{bmatrix} $
+\newline $ D1 = \begin{vmatrix}
+    0
+\end{vmatrix} = 0; \quad D2 = \begin{vmatrix}
+    0 & 0 \\
+    0 & 2
+\end{vmatrix} = 0 \Rightarrow \nabla^2 f(x, y) $ nửa xác định dương, hàm f lồi trên R.
+\newline Bên cạnh đó: $ \nabla f(x, y) = 0 $ vô nghiệm $ \Rightarrow $ f không có cực trị
+
+\section*{Bài 2.}
+Bài giải trong file assignment4-task2.ipynb trong cùng folder.
 \end{document}
