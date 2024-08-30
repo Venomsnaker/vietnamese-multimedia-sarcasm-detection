@@ -22,5 +22,10 @@ void main() {
       print("Case 2");
       break;
     }
+    default:
+    {
+      print("This is the default case");
+      break;
+    }
   }
 }
