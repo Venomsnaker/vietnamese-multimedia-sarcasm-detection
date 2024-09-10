@@ -1,107 +1,125 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class Product {
-  const Product({required this.name});
-  final String name;
-}
+Future<String?> fetchChatResponse(String message) async {
+  // Define the API URLs
+  final String url = 'https://venomsnaker-upstage-solar-rag.hf.space/call/chat';
 
-typedef CartChangedCallBack = Function(Product product, bool inCart);
+  // POST request to send the message
+  final response = await http.post(
+    Uri.parse(url),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode({
+      'data': [message],
+    }),
+  );
 
-class ShoppingListItem extends StatelessWidget {
-  ShoppingListItem({
-    required this.product,
-    required this.inCart,
-    required this.onCartChanged,
-  }) : super (key: ObjectKey(product));
 
-  final Product product;
-  final bool inCart;
-  final CartChangedCallBack onCartChanged;
+  if (response.statusCode == 200) {
+    print('POST response body: ${jsonDecode(response.body)['event_id']}');
+    // Parse the JSON response
+    final postResponseData = jsonDecode(response.body);
 
-  Color _getColor(BuildContext context) {
-    return inCart ? Colors.black54 : Theme.of(context).primaryColor;
-  }
+    // Extract EVENT_ID from the response
+    final eventId = postResponseData['event_id'];
 
-  TextStyle? _getTextStyle(BuildContext context) {
-    if (!inCart) return null;
+    if (eventId != null) {
+      // Polling the server to check the event status
+      while (true) {
+        // GET request to fetch the chat response
+        final eventResponse = await http.get(Uri.parse('$url/eventId'));
 
-    return const TextStyle(
-      color: Colors.black54,
-      decoration: TextDecoration.lineThrough,
-    );
-  }
+        if (eventResponse.statusCode == 200) {
+          // Parse the event response
+          final eventResponseData = jsonDecode(eventResponse.body);
+          final status = eventResponseData['event'];
 
-  @override
-  Widget build(BuildContext context) {
-      return ListTile(
-        onTap: () {
-          onCartChanged(product, inCart);
-        },
-        leading: CircleAvatar(
-          backgroundColor: _getColor(context),
-          child: Text(product.name[0]),
-        ),
-        title: Text(
-          product.name,
-          style: _getTextStyle(context),
-        ),
-      );
-  }
-}
-
-class ShoppingList extends StatefulWidget {
-  const ShoppingList({required this.products, super.key});
-
-  final List<Product> products;
-
-  @override
-  State<ShoppingList> createState() => _ShoppingListState();
-}
-
-class _ShoppingListState extends State<ShoppingList> {
-  final _shoppingCart = <Product>{};
-
-  void _handleCartChanged(Product product, bool inCart) {
-    setState(() {
-      if (!inCart) {
-        _shoppingCart.add(product);
-      } else {
-        _shoppingCart.remove(product);
+          if (status == 'complete') {
+            // Return the response data
+            return eventResponseData['data'][0];
+          } else {
+            // Wait before retrying
+            await Future.delayed(Duration(seconds: 1));
+          }
+        } else {
+          throw Exception('Failed to fetch chat response');
+        }
       }
-    });
-  }
-
-  @override
-  Widget build (BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Shopping List"),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        children: widget.products.map((product) {
-          return ShoppingListItem(
-            product: product,
-            inCart: _shoppingCart.contains(product),
-            onCartChanged: _handleCartChanged,
-          );
-        }).toList(),
-      )
-    );
+    } else {
+      throw Exception('Event ID not found in response');
+    }
+  } else {
+    throw Exception('Failed to send message');
   }
 }
 
 void main() {
-  runApp(const MaterialApp(
-    title: "Shopping App",
-    home: ShoppingList(
-      products: [
-        Product(name: "Egg"),
-        Product(name: "Flour"),
-        Product(name: "Chocolate"),
-      ])
-  ));
+  runApp(
+    MaterialApp(
+      home: ChatScreen(),
+    ),
+  );
 }
 
+class ChatScreen extends StatefulWidget {
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
 
+class _ChatScreenState extends State<ChatScreen> {
+  String _response = '';
+  final TextEditingController _controller = TextEditingController();
 
+  void _sendMessage() async {
+    final message = _controller.text;
+    if (message.isEmpty) return;
+
+    try {
+      final response = await fetchChatResponse(message);
+      setState(() {
+        _response = response ?? 'No response';
+      });
+    } catch (e) {
+      setState(() {
+        _response = 'Error: $e';
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Chat with API'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: 'Enter your message',
+              ),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _sendMessage,
+              child: Text('Send'),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Response:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text(_response),
+          ],
+        ),
+      ),
+    );
+  }
+}
