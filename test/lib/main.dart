@@ -86,7 +86,7 @@ class _TestAppState extends State<TestApp> {
 }
 
 Future<String?> fetchChatResponse(String message) async {
-  const String url = "https://gradio-chatinterface-random-response.hf.space/call/chat";
+  const String url = "https://venomsnaker-upstage-solar-rag.hf.space/call/predict";
 
   final postResponse = await http.post(
     Uri.parse(url),
@@ -94,8 +94,7 @@ Future<String?> fetchChatResponse(String message) async {
       'Content-Type': 'application/json',
     },
     body: jsonEncode({
-      "data": ["Are you sentient?"],
-      "session_hash": DateTime.now().millisecondsSinceEpoch.toString(),
+      "data": [message],
     }));
 
   if (postResponse.statusCode == 200) {
@@ -103,77 +102,25 @@ Future<String?> fetchChatResponse(String message) async {
     final eventID = postResponseData['event_id'];
 
     if (eventID != null) {
-      final client = http.Client();
-      try {
-        final request = http.Request("GET", Uri.parse("$url/$eventID"));
-        final streamedResponse = await client.send(request);
+      
+      final getResponse = await http.get(
+        Uri.parse("$url/$eventID"),
+      ).timeout(const Duration(seconds: 15));
 
-        final completer = Completer<String>();
-        final buffer = StringBuffer();
-
-        streamedResponse.stream.transform(utf8.decoder).listen(
-          (String chunk) {
-            buffer.write(chunk);
-            if (chunk.trim().endsWith('"]]')) {
-              // Found the end of the response
-              completer.complete(buffer.toString());
-            }
-          },
-          onDone: () {
-            if (!completer.isCompleted) {
-              completer.complete(buffer.toString());
-            }
-          },
-          onError: (error) {
-            if (!completer.isCompleted) {
-              completer.completeError(error);
-            }
-          },
-          cancelOnError: true,
-        );
-
-        final result = await completer.future.timeout(const Duration(seconds: 30));
-        return _parseResponse(result);
-      } finally {
-        client.close();
+      if (getResponse.statusCode == 200) {
+        final getResponseData = getResponse.body;
+        int dataStart = getResponseData.indexOf('data:') + 'data:'.length;
+        String dataSection = getResponseData.substring(dataStart).trim();
+        // dataSection = dataSection.replaceAll(RegExp(r'^\[\s*"\s*|\s*"\s*\]\s*$'), '');
+        return dataSection;
+      } else {
+        throw Exception("Failed to fetch get response!");
       }
-
-    //   final getResponse = await http.get(
-    //     Uri.parse("$url/$eventID"),
-    //   ).timeout(const Duration(seconds: 15));
-
-    //   if (getResponse.statusCode == 200) {
-    //     final getResponseData = getResponse.body;
-    //     int dataStart = getResponseData.indexOf('data:') + 'data:'.length;
-    //     String dataSection = getResponseData.substring(dataStart).trim();
-    //     dataSection = dataSection.replaceAll(RegExp(r'^\[\s*"\s*|\s*"\s*\]\s*$'), '');
-    //     return dataSection;
-    //   } else {
-    //     throw Exception("Failed to fetch get response!");
-    //   }
-    // } else {
-    //   throw Exception("Event ID not found in post response");
+    } else {
+      throw Exception("Event ID not found in post response");
     }
   } else {
     throw Exception("Falied to fetch post response");
   }
 }
 
-String? _parseResponse(String response) {
-  final matches = RegExp(r'data: (.+)').allMatches(response);
-  if (matches.isNotEmpty) {
-    final lastMatch = matches.last;
-    final jsonStr = lastMatch.group(1);
-    if (jsonStr != null) {
-      try {
-        final decoded = jsonDecode(jsonStr);
-        if (decoded is List && decoded.isNotEmpty && decoded[0] is List) {
-          return decoded[0][1] as String?;
-        }
-      } catch (e) {
-        print("Error parsing JSON: $e");
-      }
-    }
-  }
-  return null;
-}
